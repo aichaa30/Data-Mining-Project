@@ -19,3 +19,7 @@ after_end = int((endorsement_date + timedelta(days=30)).timestamp())
 subreddit = reddit.subreddit("politics")
 for post in subreddit.search("Elon Musk endorsement", sort="new", time_filter="month"):
     print(f"A-Title: {post.title}, B-Score: {post.score}, C-Numcomments: {post.num_comments}, D-Created_utc: {post.created_utc}")
+
+    post.comments.replace_more(limit=0)
+    for comment in post.comments.list():
+        print(f"  Comment by {comment.author}: {comment.body} - Score: {comment.score}")

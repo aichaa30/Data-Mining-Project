@@ -126,3 +126,14 @@ with open("reddit_analysis/sentiment_after_endorsement.json", "w") as after_sent
     json.dump(data_after_sentiment, after_sentiment_file, indent=4)
 
 print("Sentiment analysis results saved successfully.")
+
+# Group data by subreddit and calculate average sentiment
+#Analyze demographic
+before_sentiment_by_subreddit = df_before.groupby("subreddit")["title_sentiment"].mean()
+after_sentiment_by_subreddit = df_after.groupby("subreddit")["title_sentiment"].mean()
+
+print("Before Endorsement Sentiment by Subreddit:")
+print(before_sentiment_by_subreddit)
+
+print("\nAfter Endorsement Sentiment by Subreddit:")
+print(after_sentiment_by_subreddit)

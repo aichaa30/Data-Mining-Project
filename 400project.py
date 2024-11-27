@@ -1,29 +1,3 @@
-"""from datetime import datetime, timedelta
-import praw
-reddit = praw.Reddit(
-    client_id= "m5ioiKMETwTaUOnPmBhDQw",
-    client_secret="0gUZLUpcF4UmudcnAtNndmL6M0t2Pw",
-    password="Tibile2009!",
-    user_agent="CIS 400",
-    username="Suitable_Bus_1876",)
-
-
-# Define timeframes (Unix timestamps)
-endorsement_date = datetime(2024, 1, 1)  # Example endorsement date
-before_start = int((endorsement_date - timedelta(days=30)).timestamp())
-before_end = int(endorsement_date.timestamp())
-after_start = int(endorsement_date.timestamp())
-after_end = int((endorsement_date + timedelta(days=30)).timestamp())
-
-# Search posts in relevant subreddit (before endorsement)
-subreddit = reddit.subreddit("politics")
-for post in subreddit.search("Elon Musk endorsement", sort="new", time_filter="month"):
-    print(f"A-Title: {post.title}, B-Score: {post.score}, C-Numcomments: {post.num_comments}, D-Created_utc: {post.created_utc}")
-
-    post.comments.replace_more(limit=0)
-    for comment in post.comments.list():
-        print(f"  Comment by {comment.author}: {comment.body} - Score: {comment.score}")"""
-
 from datetime import datetime, timedelta
 import praw
 import json
@@ -76,12 +50,14 @@ def fetch_posts(subreddit_name, keywords, time_start, time_end):
     for keyword in keywords:
         for post in subreddit.search(keyword, sort="new", time_filter="all"):
             if time_start <= post.created_utc <= time_end:
+                readable_date = datetime.utcfromtimestamp(post.created_utc).strftime('%Y-%m-%d %H:%M:%S')
                 post_data = {
                     "subreddit": subreddit_name,
                     "title": post.title,
                     "score": post.score,
                     "num_comments": post.num_comments,
                     "created_utc": post.created_utc,
+                    "created_date": readable_date,  # Add readable date
                     "id": post.id,
                     "comments": [],
                 }
@@ -128,4 +104,3 @@ with open(after_file_path, "w") as after_file:
 print(f"Data collection completed. Files saved:")
 print(f"- Before endorsement data: {os.path.abspath(before_file_path)}")
 print(f"- After endorsement data: {os.path.abspath(after_file_path)}")
-

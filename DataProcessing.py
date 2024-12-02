@@ -6,6 +6,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.sentiment import SentimentIntensityAnalyzer
 
+
 # Download necessary NLTK resources
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -109,3 +110,18 @@ print("Cleaned and sentiment-analyzed data saved successfully.")
 df_before = pd.DataFrame(data_before_sentiment)
 df_after = pd.DataFrame(data_after_sentiment)
 print(df_before.head())  # View a snapshot of the data are orgonized
+print(df_before.columns)
+print(df_after.columns)
+# Group data by subreddit and calculate average sentiment
+if "subreddit" in df_before.columns:
+    before_sentiment_by_subreddit = df_before.groupby("subreddit")["title_sentiment"].mean()
+    after_sentiment_by_subreddit = df_after.groupby("subreddit")["title_sentiment"].mean()
+
+    print("Before Endorsement Sentiment by Subreddit:")
+    print(before_sentiment_by_subreddit)
+
+    print("\nAfter Endorsement Sentiment by Subreddit:")
+    print(after_sentiment_by_subreddit)
+else:
+    print("The 'subreddit' column is missing. Ensure the input data includes subreddit information.")
+

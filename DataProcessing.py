@@ -11,6 +11,7 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('vader_lexicon')
+nltk.download('punkt_tab')
 
 # Initialize Sentiment Analyzer
 sia = SentimentIntensityAnalyzer()
@@ -21,7 +22,6 @@ with open("reddit_analysis/before_endorsement.json", "r") as before_file:
 
 with open("reddit_analysis/after_endorsement.json", "r") as after_file:
     data_after = json.load(after_file)
-
 
 
 # Part 2: Define Cleaning Functions

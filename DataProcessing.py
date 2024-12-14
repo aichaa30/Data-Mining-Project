@@ -5,6 +5,7 @@ import re
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.sentiment import SentimentIntensityAnalyzer
+from datetime import datetime, timedelta
 
 
 # Download necessary NLTK resources
@@ -22,6 +23,8 @@ with open("reddit_analysis/before_endorsement.json", "r") as before_file:
 
 with open("reddit_analysis/after_endorsement.json", "r") as after_file:
     data_after = json.load(after_file)
+
+
 
 
 # Part 2: Define Cleaning Functions
@@ -124,4 +127,47 @@ if "subreddit" in df_before.columns:
     print(after_sentiment_by_subreddit)
 else:
     print("The 'subreddit' column is missing. Ensure the input data includes subreddit information.")
+
+# Randomly select one post from the DataFrame
+random_sample_before = df_before.sample(n=1)
+random_sample_after = df_after.sample(n=1)
+
+# Display the sample with specific columns for better readability using to_string() to avoid truncation
+print("Sample from 'before' dataset:")
+print(random_sample_before[['subreddit', 'title', 'score', 'num_comments', 'created_utc',
+       'created_date', 'id', 'comments', 'cleaned_title', 'cleaned_comments',
+       'title_sentiment', 'title_is_neutral', 'title_sentiment_class',
+       'average_comment_sentiment', 'comments_are_neutral',
+       'comments_sentiment_class']].to_string(index=False))
+
+print("\nSample from 'after' dataset:")
+print(random_sample_after[['subreddit', 'title', 'score', 'num_comments', 'created_utc',
+       'created_date', 'id', 'cleaned_title', 'cleaned_comments',
+       'title_sentiment', 'title_is_neutral', 'title_sentiment_class',
+       'average_comment_sentiment', 'comments_are_neutral',
+       'comments_sentiment_class']].to_string(index=False))
+
+
+
+# Count the total number of posts in each dataset
+size_before = len(data_before)
+size_after = len(data_after)
+
+print(f"Total posts in 'before' dataset: {size_before}")
+print(f"Total posts in 'after' dataset: {size_after}")
+
+before_timestamps = [item["created_utc"] for item in data_before]
+after_timestamps = [item["created_utc"] for item in data_after]
+
+print(f"Before Range: {min(before_timestamps)} to {max(before_timestamps)}")
+print(f"After Range: {min(after_timestamps)} to {max(after_timestamps)}")
+
+before_start = datetime.utcfromtimestamp(1713124918.0)
+before_end = datetime.utcfromtimestamp(1720795972.0)
+print(f"Before Start: {before_start}, After End: {before_end}")
+
+after_start = datetime.utcfromtimestamp(1720910727.0)
+after_end = datetime.utcfromtimestamp(1728609965.0)
+print(f"After Start: {after_start}, After End: {after_end}")
+
 

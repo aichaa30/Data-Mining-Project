@@ -8,3 +8,8 @@ This project investigates public sentiment towards the 2024 Presidential Electio
 - Data Processing
 - Engagement Metrics
 - Graphs
+- JSON Reddit Analysis
+
+# Features
+- PRAW Reddit API
+- NLTK VADER

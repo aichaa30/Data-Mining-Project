@@ -156,6 +156,14 @@ size_after = len(data_after)
 print(f"Total posts in 'before' dataset: {size_before}")
 print(f"Total posts in 'after' dataset: {size_after}")
 
+# Compute total number of comments for both datasets
+total_comments_before = df_before['num_comments'].sum()
+total_comments_after = df_after['num_comments'].sum()
+
+print(f"Total comments before endorsement: {total_comments_before}")
+print(f"Total comments after endorsement: {total_comments_after}")
+
+# Compute before and after timestamps
 before_timestamps = [item["created_utc"] for item in data_before]
 after_timestamps = [item["created_utc"] for item in data_after]
 
@@ -164,7 +172,7 @@ print(f"After Range: {min(after_timestamps)} to {max(after_timestamps)}")
 
 before_start = datetime.utcfromtimestamp(1713124918.0)
 before_end = datetime.utcfromtimestamp(1720795972.0)
-print(f"Before Start: {before_start}, After End: {before_end}")
+print(f"Before Start: {before_start}, Before End: {before_end}")
 
 after_start = datetime.utcfromtimestamp(1720910727.0)
 after_end = datetime.utcfromtimestamp(1728609965.0)

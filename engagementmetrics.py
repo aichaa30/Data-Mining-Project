@@ -138,3 +138,66 @@ plt.legend()
 
 plt.tight_layout()
 plt.show()
+
+# Group by subreddit and calculate total and average engagement metrics
+engagement_before_subreddit = df_before.groupby('subreddit')[['score', 'num_comments']].agg(['sum', 'mean']).reset_index()
+engagement_after_subreddit = df_after.groupby('subreddit')[['score', 'num_comments']].agg(['sum', 'mean']).reset_index()
+
+# Print the results
+print("Total scores by subreddit before endorsement:")
+print(engagement_before_subreddit)
+
+print("\nTotal scores by subreddit after endorsement:")
+print(engagement_after_subreddit)
+
+
+# Flatten the column multi-index for easier plotting
+engagement_before_subreddit.columns = ['subreddit', 'total_score_before', 'average_score_before', 'total_comments_before', 'average_comments_before']
+engagement_after_subreddit.columns = ['subreddit', 'total_score_after', 'average_score_after', 'total_comments_after', 'average_comments_after']
+
+# Merging the before and after dataframes on subreddit
+engagement_subreddit = pd.merge(engagement_before_subreddit, engagement_after_subreddit, on='subreddit', how='outer')
+
+# Plotting total scores by subreddit
+plt.figure(figsize=(14, 8))
+engagement_subreddit.set_index('subreddit')[['total_score_before', 'total_score_after']].plot(kind='bar', color=['skyblue', 'salmon'], width=0.7)
+plt.title('Total Scores by Subreddit (Before vs. After Endorsement)')
+plt.ylabel('Total Score')
+plt.xlabel('Subreddit')
+plt.xticks(rotation=45, ha='right')
+plt.legend(title='Timeframe', loc='upper right')
+plt.tight_layout()
+plt.show()
+
+# Plotting average scores by subreddit
+plt.figure(figsize=(14, 8))
+engagement_subreddit.set_index('subreddit')[['average_score_before', 'average_score_after']].plot(kind='bar', color=['skyblue', 'salmon'], width=0.7)
+plt.title('Average Scores by Subreddit (Before vs. After Endorsement)')
+plt.ylabel('Average Score')
+plt.xlabel('Subreddit')
+plt.xticks(rotation=45, ha='right')
+plt.legend(title='Timeframe', loc='upper right')
+plt.tight_layout()
+plt.show()
+
+# Plotting total comments by subreddit
+plt.figure(figsize=(14, 8))
+engagement_subreddit.set_index('subreddit')[['total_comments_before', 'total_comments_after']].plot(kind='bar', color=['skyblue', 'salmon'], width=0.7)
+plt.title('Total Comments by Subreddit (Before vs. After Endorsement)')
+plt.ylabel('Total Comments')
+plt.xlabel('Subreddit')
+plt.xticks(rotation=45, ha='right')
+plt.legend(title='Timeframe', loc='upper right')
+plt.tight_layout()
+plt.show()
+
+# Plotting average comments by subreddit
+plt.figure(figsize=(14, 8))
+engagement_subreddit.set_index('subreddit')[['average_comments_before', 'average_comments_after']].plot(kind='bar', color=['skyblue', 'salmon'], width=0.7)
+plt.title('Average Comments by Subreddit (Before vs. After Endorsement)')
+plt.ylabel('Average Comments')
+plt.xlabel('Subreddit')
+plt.xticks(rotation=45, ha='right')
+plt.legend(title='Timeframe', loc='upper right')
+plt.tight_layout()
+plt.show()

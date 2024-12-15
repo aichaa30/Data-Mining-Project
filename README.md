@@ -20,3 +20,5 @@ This project investigates public sentiment towards the 2024 Presidential Electio
 # Features
 - PRAW Reddit API
 - NLTK VADER
+
+https://github.com/lrwilson896/CIS400-Proj

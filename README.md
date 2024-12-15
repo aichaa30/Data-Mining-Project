@@ -6,7 +6,9 @@ This project investigates public sentiment towards the 2024 Presidential Electio
 # How to Use
 1. Open up a Python supported IDE such as PyCharm or Visual Studio Code
 2. Create two files: data collection program and data processing program
-3. Before downloading the code, make sure to pip install "praw", ""
+3. Before downloading the code, make sure to pip install the "praw", "pandas", and "nltk" packages in dyour terminal
+4. Download 400project.py to data collect
+5. Download DataProcessing.py to clean the collected data
 
 # Table of Contents
 - Data Collection

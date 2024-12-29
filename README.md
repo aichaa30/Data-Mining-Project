@@ -41,14 +41,17 @@ Use data analytics and visualization techniques to provide actionable insights i
 
 ## Project Features
 Data Collection: Automated retrieval of Reddit posts and comments using the Reddit API. Data was collected across multiple subreddits, focusing on specific keywords related to the endorsement and the 2024 U.S. presidential election. (File: 400.py)
+
 Data Cleaning: Processing and refining raw data to ensure accuracy and relevance for sentiment analysis and visualization. (File: DataProcessing.py)
+
 Sentiment Analysis: Measuring sentiment trends across different time periods and subreddits to evaluate shifts in public opinion.
+
 Visualization: Development of various graphs and visual tools to analyze and present the findings effectively:
-Sentiment Distribution Bar Chart (File: graph.py)
-Average Sentiment by Subreddit (File: graph2.py)
-Sentiment Trends Over Time (File: graph3.py)
-Word Cloud for Key Topics (File: graph4.py)
-Engagement Over Time (File: graph5.py)
+- Sentiment Distribution Bar Chart (File: graph.py)
+- Average Sentiment by Subreddit (File: graph2.py)
+- Sentiment Trends Over Time (File: graph3.py)
+- Word Cloud for Key Topics (File: graph4.py)
+- Engagement Over Time (File: graph5.py)
 
 ## Conclusion
 
